@@ -1,0 +1,130 @@
+import { useRef } from "react";
+import { gsap } from "gsap";
+import RotatingText from "../Textanimations/RotatingText/RotatingText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import TextPressure from "../Textanimations/TextPressure/TextPressure";
+gsap.registerPlugin(ScrollTrigger);
+
+const projects = [
+  {
+    id: 1,
+    title: "Layers-ANARC",
+    description: "Layers Re-designed website with awesome animations",
+    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+  },
+];
+
+const Projects = () => {
+  const projectRef = useRef();
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useGSAP(() => {
+    const section = sectionRef.current;
+    const cards = cardsRef.current;
+
+    if (section && cards.length) {
+      // Animate section title
+      gsap.to(projectRef.current, {
+        opacity: 1,
+        textShadow: "0px 0px 10px rgba(255, 255, 255, 1)",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          scroller: "body",
+          start: "top 60%",
+          end: "top 10%",
+          scrub: 1,
+        },
+      });
+      // Animate cards
+      cards.forEach((card, index) => {
+        if (card) {
+          gsap.from(card, {
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+            delay: index * 0.2,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+            },
+          });
+        }
+      });
+    }
+  }, []);
+
+  return (
+    <section id="Projects" ref={sectionRef} className="py-20 bg-black">
+      <div className="container mx-auto px-4">
+        <div
+          ref={projectRef}
+          className=" relative z-30 mb-10 text-white place-self-center text-5xl border-t-2 border-gray-300 bg-gradient-to-b from-gray-600 from-1% via-black via-20% to-black opacity-0"
+        >
+          <TextPressure
+            text="projects"
+            flex={true}
+            alpha={false}
+            stroke={false}
+            width={true}
+            weight={true}
+            italic={true}
+            textColor="#ffffff"
+            strokeColor="#ff0000"
+            minFontSize={150}
+          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="relative z-10 bg-neutral-900 p-3 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute left-0 mx-3 blur-lg z-0 w-[96%] h-48 object-cover rounded-md"
+              />
+              <img
+                src={project.image}
+                alt={project.title}
+                className="relative z-20 w-full h-48 object-cover rounded-md"
+              />
+              <div className="p-2">
+                <h3 className="text-3xl font-bold font-[roboto] text-white my-4">
+                  {project.title}
+                </h3>
+                <p className="text-gray-400">{project.description}</p>
+                <a
+                  href="https://layers-ar.vercel.app"
+                  target="_blank"
+                  className="mt-4 w-[100px] flex px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300"
+                >
+                  <RotatingText
+                    texts={["Go to", "Website"]}
+                    mainClassName="px-2 sm:px-2 md:px-3 text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+                    staggerFrom={"last"}
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "-120%" }}
+                    staggerDuration={0.025}
+                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                    rotationInterval={2000}
+                  />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="relative -bottom-10 place-self-center  text-white">
+        More projects will be added soon...
+      </p>
+    </section>
+  );
+};
+
+export default Projects;
