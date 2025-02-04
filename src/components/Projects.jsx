@@ -41,9 +41,10 @@ const Projects = () => {
       cards.forEach((card, index) => {
         if (card) {
           gsap.from(card, {
-            y: 100,
+            scale: 0.8,
             opacity: 0,
             duration: 0.8,
+            ease: "power1.out",
             delay: index * 0.2,
             scrollTrigger: {
               trigger: card,
