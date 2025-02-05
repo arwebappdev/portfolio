@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -23,6 +25,8 @@ function App() {
       <div className="">
         <Contact />
       </div>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
