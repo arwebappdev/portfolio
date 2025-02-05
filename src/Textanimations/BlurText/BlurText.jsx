@@ -97,9 +97,11 @@ const BlurText = ({
           key={index}
           style={props}
           className={`${
-            index == 2 ? " text-[65px] font-semibold text-gray-0" : ""
+            index == 2
+              ? " text-[65px] font-semibold text-gray-700 dark:text-gray-200"
+              : ""
           } ${index < 2 ? " text-[40px] text-gray-400 font-light" : ""} ${
-            index > 2 ? " text-[50px] text-gray-300" : ""
+            index > 2 ? " text-[50px] text-gray-400 dark:text-gray-300" : ""
           } inline-block transition-transform will-change-[transform,filter,opacity]`}
         >
           {elements[index] === " " ? "\u00A0" : elements[index]}

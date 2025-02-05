@@ -15,7 +15,7 @@ const Navbar = () => {
   const isHovered = useRef(false); // Track hover state
 
   const navRef = useRef(null);
-  let lastScrollY = useRef(0);
+  const lastScrollY = useRef(0);
   const imgRef = useRef();
   const nameRef = useRef();
 
@@ -153,14 +153,14 @@ const Navbar = () => {
     <div className="w-full h-screen overflow-hidden">
       <div
         ref={navRef}
-        className="flex z-50 backdrop-blur-sm fixed top-0 h-16 w-full p-2 bg-gradient-to-b from-black from-20% via-black/65 via-70% to-black/40"
+        className="flex z-50 backdrop-blur-sm fixed top-0 h-16 w-full p-2 bg-gradient-to-b from-white from-20% via-white/65 via-70% to-white/40 dark:from-black dark:via-black/65 dark:to-black/40"
         onMouseEnter={() => (isHovered.current = true)}
         onMouseLeave={() => (isHovered.current = false)}
       >
         <img
           ref={imgRef}
-          src={arlogo}
-          className="absolute left-2 w-12 rounded-full ring-1 ring-neutral-600"
+          src={arlogo || "/placeholder.svg"}
+          className="absolute left-2 w-12 rounded-full ring-1 ring-neutral-400 dark:ring-neutral-600 invert-0 dark:invert-0"
         ></img>
 
         <div
@@ -179,7 +179,7 @@ const Navbar = () => {
 
         {/**Right menu */}
         <div className=" hidden sm:flex place-self-center absolute right-5">
-          <ul className="flex gap-7 font-[roboto] font-light text-gray-400">
+          <ul className="flex gap-7 font-[roboto] font-light text-gray-600 dark:text-gray-400">
             <a
               href="#About"
               className="h-fit w-fit"
@@ -187,8 +187,10 @@ const Navbar = () => {
             >
               <li
                 onClick={() => setActiveSection("About")}
-                className={`hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "About" ? "text-white" : "text-gray-400"
+                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
+                  activeSection === "About"
+                    ? "text-black dark:text-white scale-105"
+                    : "text-gray-500 dark:text-gray-400"
                 }`}
               >
                 About Me
@@ -201,8 +203,10 @@ const Navbar = () => {
             >
               <li
                 onClick={() => setActiveSection("Skills")}
-                className={`hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Skills" ? "text-white" : "text-gray-400"
+                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
+                  activeSection === "Skills"
+                    ? "text-black dark:text-white scale-105"
+                    : "text-gray-500 dark:text-gray-400"
                 }`}
               >
                 Skills
@@ -215,8 +219,10 @@ const Navbar = () => {
             >
               <li
                 onClick={() => setActiveSection("Projects")}
-                className={`hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Projects" ? "text-white" : "text-gray-400"
+                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
+                  activeSection === "Projects"
+                    ? "text-black dark:text-white scale-105"
+                    : "text-gray-500 dark:text-gray-400"
                 }`}
               >
                 Projects
@@ -229,8 +235,10 @@ const Navbar = () => {
             >
               <li
                 onClick={() => setActiveSection("Contact")}
-                className={`hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Contact" ? "text-white" : "text-gray-400"
+                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
+                  activeSection === "Contact"
+                    ? "text-black dark:text-white scale-105"
+                    : "text-gray-500 dark:text-gray-400"
                 }`}
               >
                 Contact
@@ -242,7 +250,7 @@ const Navbar = () => {
           onClick={() => setMenu(!menu)}
           onMouseEnter={() => setMenu(1)}
           onMouseLeave={() => setMenu(0)}
-          className={`sm:hidden place-self-center absolute right-5 duration-200 text-white `}
+          className={`sm:hidden place-self-center absolute right-5 duration-200 text-black dark:text-white `}
         >
           <FontAwesomeIcon
             icon={menu ? faEllipsisVertical : faBars}
@@ -254,11 +262,11 @@ const Navbar = () => {
       <div
         onMouseEnter={() => setMenu(1)}
         onMouseLeave={() => setMenu(0)}
-        className={`fixed z-50 top-[30vh] h-fit w-fit bg-gradient-to-r from-black/40 from-[0%] via-black/60 via-[50%] to-black/90 to-[100%] backdrop-blur-md ${
+        className={`fixed z-50 top-[30vh] h-fit w-fit bg-gradient-to-r from-white/40 from-[0%] via-white/60 via-[50%] to-white/90 to-[100%] dark:from-black/40 dark:via-black/60 dark:to-black/90 backdrop-blur-md ${
           menu ? "" : "translate-x-[150%]"
         } right-0 rounded-l-[40px] p-5 -translate-y-1/2 duration-200`}
       >
-        <ul className=" gap-7 font-[roboto] font-light text-gray-400 text-3xl text-center">
+        <ul className="gap-7 font-[roboto] font-light text-gray-600 dark:text-gray-400 text-3xl text-center">
           <a
             href="#About"
             className="h-fit w-fit"
@@ -267,7 +275,9 @@ const Navbar = () => {
             <li
               onClick={() => setActiveSection("About")}
               className={`active:scale-95 duration-200 ${
-                activeSection === "About" ? "text-white" : "text-gray-400"
+                activeSection === "About"
+                  ? "text-black dark:text-white scale-105"
+                  : "text-gray-500 dark:text-gray-400"
               }`}
             >
               About Me
@@ -281,7 +291,9 @@ const Navbar = () => {
             <li
               onClick={() => setActiveSection("Skills")}
               className={`active:scale-95 duration-200 ${
-                activeSection === "Skills" ? "text-white" : "text-gray-400"
+                activeSection === "Skills"
+                  ? "text-black dark:text-white scale-105"
+                  : "text-gray-500 dark:text-gray-400"
               }`}
             >
               Skills
@@ -295,7 +307,9 @@ const Navbar = () => {
             <li
               onClick={() => setActiveSection("Projects")}
               className={`active:scale-95 duration-200 ${
-                activeSection === "Projects" ? "text-white" : "text-gray-400"
+                activeSection === "Projects"
+                  ? "text-black dark:text-white scale-105"
+                  : "text-gray-500 dark:text-gray-400"
               }`}
             >
               Projects
@@ -309,7 +323,9 @@ const Navbar = () => {
             <li
               onClick={() => setActiveSection("Contact")}
               className={`active:scale-95 duration-200 ${
-                activeSection === "Contact" ? "text-white" : "text-gray-400"
+                activeSection === "Contact"
+                  ? "text-black dark:text-white scale-105"
+                  : "text-gray-500 dark:text-gray-400"
               }`}
             >
               Contact
@@ -320,7 +336,7 @@ const Navbar = () => {
       {/** Hero */}
       <div
         id="Hero"
-        className="relative z-0 bg-black h-full w-full overflow-x-hidden"
+        className="relative z-0 bg-white dark:bg-black h-full w-full overflow-x-hidden"
       >
         <div className="grid sm:grid-cols-2">
           <div className="absolute bottom-20 w-[380px] h-[240px] origin-left sm:scale-95 p-2 ml-2 place-content-evenly border-l-2 border-gray-700">
@@ -329,7 +345,7 @@ const Navbar = () => {
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-[] font-[roboto] text-white"
+              className="text-[] font-[roboto] text-black dark:text-white"
             />
           </div>
           <div className="hidden sm:flex absolute right-0 h-full w-[40%] bg-slate-400"></div>
