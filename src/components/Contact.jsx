@@ -12,6 +12,7 @@ import {
   faLinkedin,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,16 +20,31 @@ const Contact = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
   const contactRef = useRef();
-
+  //dark mode
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
   useEffect(() => {
-    const section = sectionRef.current;
-    const cards = cardsRef.current;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-    if (section && cards.length) {
-      // Animate title
+    const handleThemeChange = (event) => {
+      setIsDarkMode(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
+  }, []);
+
+  useGSAP(() => {
+    if (contactRef.current) {
       gsap.to(contactRef.current, {
         opacity: 1,
-        textShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)", // Adjusted for light mode
+        textShadow: isDarkMode
+          ? "0px 0px 10px rgba(255, 255, 255, 0.5)"
+          : "0px 0px 10px rgba(0, 0, 0, 0.8)",
         scrollTrigger: {
           trigger: sectionRef.current,
           scroller: "body",
@@ -37,6 +53,14 @@ const Contact = () => {
           scrub: 1,
         },
       });
+    }
+  }, [isDarkMode]); // <- Re-run animation when theme changes
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const cards = cardsRef.current;
+
+    if (section && cards.length) {
       // Animate cards
       cards.forEach((card, index) => {
         gsap.from(card, {
@@ -51,25 +75,6 @@ const Contact = () => {
         });
       });
     }
-  }, []);
-
-  //dark mode
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const handleThemeChange = (event) => {
-      setIsDarkMode(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleThemeChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleThemeChange);
-    };
   }, []);
 
   const contactMethods = [

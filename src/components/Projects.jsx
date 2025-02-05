@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import RotatingText from "../Textanimations/RotatingText/RotatingText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,15 +20,31 @@ const Projects = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
 
-  useGSAP(() => {
-    const section = sectionRef.current;
-    const cards = cardsRef.current;
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
-    if (section && cards.length) {
-      // Animate section title
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleThemeChange = (event) => {
+      setIsDarkMode(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
+  }, []);
+
+  useGSAP(() => {
+    if (projectRef.current) {
       gsap.to(projectRef.current, {
         opacity: 1,
-        textShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)", // Adjusted for light mode
+        textShadow: isDarkMode
+          ? "0px 0px 10px rgba(255, 255, 255, 0.5)"
+          : "0px 0px 10px rgba(0, 0, 0, 0.8)",
         scrollTrigger: {
           trigger: sectionRef.current,
           scroller: "body",
@@ -37,6 +53,14 @@ const Projects = () => {
           scrub: 1,
         },
       });
+    }
+  }, [isDarkMode]); // <- Re-run animation when theme changes
+
+  useGSAP(() => {
+    const section = sectionRef.current;
+    const cards = cardsRef.current;
+
+    if (section && cards.length) {
       // Animate cards
       cards.forEach((card, index) => {
         if (card) {

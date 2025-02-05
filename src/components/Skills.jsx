@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextPressure from "../Textanimations/TextPressure/TextPressure";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -16,18 +16,43 @@ const Skills = () => {
   const skillRef = useRef();
   const pageRef = useRef();
   const blurRef = useRef();
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleThemeChange = (event) => {
+      setIsDarkMode(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleThemeChange);
+    };
+  }, []);
+
   useGSAP(() => {
-    gsap.to(skillRef.current, {
-      opacity: 1,
-      textShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
-      scrollTrigger: {
-        trigger: pageRef.current,
-        scroller: "body",
-        start: "top 60%",
-        end: "top 10%",
-        scrub: 1,
-      },
-    });
+    if (skillRef.current) {
+      gsap.to(skillRef.current, {
+        opacity: 1,
+        textShadow: isDarkMode
+          ? "0px 0px 10px rgba(255, 255, 255, 0.5)"
+          : "0px 0px 10px rgba(0, 0, 0, 0.8)",
+        scrollTrigger: {
+          trigger: pageRef.current,
+          scroller: "body",
+          start: "top 60%",
+          end: "top 10%",
+          scrub: 1,
+        },
+      });
+    }
+  }, [isDarkMode]); // <- Re-run animation when theme changes
+
+  useGSAP(() => {
     gsap.to(blurRef.current, {
       opacity: 1,
       scrollTrigger: {
