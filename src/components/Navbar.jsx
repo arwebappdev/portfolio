@@ -351,7 +351,6 @@ const Navbar = () => {
           <div className="hidden sm:flex absolute right-0 h-full w-[40%] bg-slate-400"></div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 h-[20px] w-[20px] bg-white sm:bg-yellow-300 md:bg-orange-600 lg:bg-red-800 xl:bg-blue-700"></div>
     </div>
   );
 };

@@ -68,7 +68,7 @@ const About = () => {
         />
       </div>
 
-      <div className="relative left-0 top-1/2 w-[70%] sm:w-1/2 h-fit ring-2 ring-gray-300 dark:ring-gray-700 text-4xl sm:text-5xl font-mono p-5 text-black dark:text-white">
+      <div className="relative left-0 top-0 translate-y-[15%] w-[70%] sm:w-1/2 h-fit ring-2 ring-gray-300 dark:ring-gray-700 text-4xl sm:text-5xl font-mono p-5 text-black dark:text-white">
         <DecryptedText
           text="Hi, I am Abdul Rehman a curious FRONTEND Developer, who loves to create websites with Cool Animations and Creative UIs..."
           animateOn="view"

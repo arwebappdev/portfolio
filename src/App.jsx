@@ -7,7 +7,7 @@ import Skills from "./components/Skills";
 
 function App() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-white dark:bg-black">
       <div className="">
         <Navbar />
       </div>
@@ -28,3 +28,4 @@ function App() {
 }
 
 export default App;
+/**<div className="absolute bottom-0 left-0 h-[20px] w-[20px] bg-white sm:bg-yellow-300 md:bg-orange-600 lg:bg-red-800 xl:bg-blue-700"></div> */
