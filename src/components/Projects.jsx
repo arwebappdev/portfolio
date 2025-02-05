@@ -128,7 +128,7 @@ const Projects = () => {
                   <a
                     href="https://layers-ar.vercel.app"
                     target="_blank"
-                    className="mt-4 w-[120px] flex px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
+                    className="mt-4 place-content-center w-[120px] flex px-2 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
                   >
                     <RotatingText
                       texts={["Go to", "Website"]}
