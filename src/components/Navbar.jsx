@@ -153,7 +153,7 @@ const Navbar = () => {
     <div className="w-full h-screen overflow-hidden">
       <div
         ref={navRef}
-        className="flex z-50 backdrop-blur-sm fixed top-0 h-16 w-full p-2 bg-gradient-to-b from-white from-20% via-white/65 via-70% to-white/40 dark:from-black dark:via-black/65 dark:to-black/40"
+        className="flex z-[45] backdrop-blur-sm fixed top-0 h-16 w-full p-2 bg-gradient-to-b from-white from-20% via-white/65 via-70% to-white/40 dark:from-black dark:via-black/65 dark:to-black/40"
         onMouseEnter={() => (isHovered.current = true)}
         onMouseLeave={() => (isHovered.current = false)}
       >

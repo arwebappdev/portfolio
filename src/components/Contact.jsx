@@ -124,7 +124,7 @@ const Contact = () => {
       color: "text-green-500",
       spot: "rgba(16, 185, 129, 0.2)",
       icon: faFacebookF,
-      url: "",
+      url: "https://www.fiverr.com/s/6Y0E82A",
     },
   ];
 
