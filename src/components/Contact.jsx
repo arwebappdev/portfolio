@@ -163,7 +163,7 @@ const Contact = () => {
               ref={(el) => (cardsRef.current[index] = el)}
             >
               <SpotlightCard
-                className="custom-spotlight-card rounded-lg p-6 bg-gray-100 dark:bg-neutral-900 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="custom-spotlight-card rounded-lg p-6 bg-gray-200 dark:bg-neutral-900 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 spotlightColor={method.spot}
               >
                 <div className="flex items-center justify-center mb-4">

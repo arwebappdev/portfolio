@@ -107,7 +107,7 @@ const Projects = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {projects.map((project, index) => (
             <div key={project.id} ref={(el) => (cardsRef.current[index] = el)}>
-              <div className="relative z-10 bg-gray-100 dark:bg-neutral-900 p-3 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="relative z-10 bg-gray-200 dark:bg-neutral-900 p-3 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 <img
                   src={project.image}
                   alt={project.title}
