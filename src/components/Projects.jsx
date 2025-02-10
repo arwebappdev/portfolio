@@ -4,6 +4,7 @@ import RotatingText from "../Textanimations/RotatingText/RotatingText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import TextPressure from "../Textanimations/TextPressure/TextPressure";
+import anarc from "../assets/anarc.webp";
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
@@ -11,7 +12,7 @@ const projects = [
     id: 1,
     title: "Layers-ANARC",
     description: "Layers Re-designed website with awesome animations",
-    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    image: anarc,
   },
 ];
 
@@ -107,18 +108,22 @@ const Projects = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {projects.map((project, index) => (
             <div key={project.id} ref={(el) => (cardsRef.current[index] = el)}>
-              <div className="relative z-10 bg-gray-200 dark:bg-neutral-900 p-3 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="relative bg-gray-200 dark:bg-neutral-900 p-3 rounded-lg shadow-lg overflow-hidden duration-300 hover:scale-105 hover:shadow-2xl">
+                {/* Background Video as a Shadow */}
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="absolute left-0 mx-3 blur-lg z-0 w-[96%] h-48 object-cover rounded-md"
+                  className="absolute left-3 h-48 w-[93%] object-cover blur-md rounded-md"
                 />
+
+                {/* Main Video */}
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="relative z-20 w-full h-48 object-cover rounded-md"
+                  className="relative z-10 w-full h-48 object-cover rounded-md"
                 />
-                <div className="p-2">
+
+                <div className="p-2 relative z-20">
                   <h3 className="text-4xl font-bold font-[roboto] text-black dark:text-white my-4">
                     {project.title}
                   </h3>
@@ -128,12 +133,12 @@ const Projects = () => {
                   <a
                     href="https://layers-ar.vercel.app"
                     target="_blank"
-                    className="mt-4 place-content-center w-[120px] flex px-2 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
+                    className="mt-4 flex w-[120px] items-center justify-center px-2 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
                   >
                     <RotatingText
                       texts={["Go to", "Website"]}
                       mainClassName="px-2 sm:px-2 md:px-3 text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-                      staggerFrom={"last"}
+                      staggerFrom="last"
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
                       exit={{ y: "-120%" }}
