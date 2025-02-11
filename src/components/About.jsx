@@ -68,7 +68,7 @@ const About = () => {
         />
       </div>
 
-      <div className="relative left-0 top-0 translate-y-[15%] w-[70%] sm:w-1/2 h-fit ring-2 ring-gray-300 dark:ring-gray-700 text-4xl sm:text-5xl font-mono p-5 text-black dark:text-white">
+      <div className="relative left-0 top-0 mt-5 w-[70%] sm:w-1/2 h-fit ring-2 ring-gray-300 dark:ring-gray-700 text-4xl sm:text-5xl font-mono p-5 text-black dark:text-white">
         <DecryptedText
           text="Hi, I'm Abdul Rehman, a passionate Frontend Developer with a keen eye for design and a love for crafting interactive, visually stunning websites. I specialize in building creative UIs with smooth animations, ensuring an engaging user experience."
           animateOn="view"
