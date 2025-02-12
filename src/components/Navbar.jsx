@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import arlogo from "../assets/arlogo.jpg";
+import ar1 from "../assets/ar1.jpg";
+import ar2 from "../assets/ar2.jpg";
 import ShinyText from "../Textanimations/ShinyText/ShinyText";
 import BlurText from "../Textanimations/BlurText/BlurText";
+import PixelTransition from "../Animations/PixelTransition/PixelTransition";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
@@ -149,6 +153,79 @@ const Navbar = () => {
       });
     });
   });
+
+  /**Title tilting animation  */
+  const titleRef = useRef();
+
+  useEffect(() => {
+    const title = titleRef.current;
+    let bounds;
+    let animationFrameId;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+
+    const updateBounds = () => {
+      bounds = title.getBoundingClientRect();
+    };
+
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const handleMouseMove = (e) => {
+      if (!bounds) updateBounds();
+
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const leftX = mouseX - bounds.x;
+      const topY = mouseY - bounds.y;
+      const center = {
+        x: leftX - bounds.width / 2,
+        y: topY - bounds.height / 2,
+      };
+
+      // Limit the rotation angles
+      const maxRotation = 30; // Maximum rotation angle in degrees
+      targetRotationY = clamp(center.x * 0.05, -maxRotation, maxRotation);
+      targetRotationX = clamp(-center.y * 0.05, -maxRotation, maxRotation);
+    };
+
+    const animateTilt = () => {
+      currentRotationX = lerp(currentRotationX, targetRotationX, 0.1);
+      currentRotationY = lerp(currentRotationY, targetRotationY, 0.1);
+
+      gsap.set(title, {
+        rotationX: currentRotationX,
+        rotationY: currentRotationY,
+        transformPerspective: 900,
+        transformOrigin: "center",
+      });
+
+      animationFrameId = requestAnimationFrame(animateTilt);
+    };
+
+    const handleMouseLeave = () => {
+      targetRotationX = 0;
+      targetRotationY = 0;
+    };
+
+    window.addEventListener("resize", updateBounds);
+    window.addEventListener("mousemove", handleMouseMove);
+    title.addEventListener("mouseleave", handleMouseLeave);
+
+    animateTilt();
+
+    return () => {
+      window.removeEventListener("resize", updateBounds);
+      window.removeEventListener("mousemove", handleMouseMove);
+      title.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <div className="w-full h-screen overflow-hidden">
       <div
@@ -336,10 +413,13 @@ const Navbar = () => {
       {/** Hero */}
       <div
         id="Hero"
-        className="relative z-0 bg-white dark:bg-black h-full w-full overflow-x-hidden"
+        className="relative z-0 bg-white dark:bg-black h-full w-full overflow-hidden"
       >
         <div className="grid sm:grid-cols-2">
-          <div className="absolute bottom-20 w-[380px] h-[240px] origin-left sm:scale-95 p-2 ml-2 place-content-evenly border-l-2 border-gray-700">
+          <div
+            ref={titleRef}
+            className="absolute bottom-20 w-[380px] h-[240px] origin-left sm:scale-95 p-2 ml-2 place-content-evenly border-l-2 border-gray-700 duration-300"
+          >
             <BlurText
               text="I'm the DEVELOPER You need!"
               delay={150}
@@ -348,7 +428,48 @@ const Navbar = () => {
               className="text-[] font-[roboto] text-black dark:text-white"
             />
           </div>
-          <div className="hidden sm:flex absolute right-0 h-full w-[40%] bg-slate-400"></div>
+          <div className="hidden sm:flex absolute right-0 h-full w-[40%] place-content-start">
+            <PixelTransition
+              firstContent={
+                <div
+                  className="p-5"
+                  style={{
+                    backgroundImage: `url(${ar1})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <p className="text-3xl font-roboto text-white w-52">
+                    &ldquo;I pray that you stand with me till my last
+                    breath.&ldquo;
+                  </p>
+                </div>
+              }
+              secondContent={
+                <div
+                  className="p-5 place-content-end"
+                  style={{
+                    backgroundImage: `url(${ar2})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <p className="place-self-end text-3xl font-roboto text-white">
+                    &ldquo;If I tell him what he is now, he will not believe
+                    me!&ldquo;
+                  </p>
+                </div>
+              }
+              gridSize={10}
+              pixelColor="#9e9e9e"
+              animationStepDuration={0.4}
+              className="custom-pixel-card place-self-center h-[500px] w-[500px]"
+            />
+          </div>
         </div>
       </div>
     </div>
