@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import HireMe from "./components/HireMe";
+import D1 from "./components/D1";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
 
       <div className="">
         <About />
+      </div>
+      <div className="">
+        <D1 />
       </div>
       <div className="">
         <Skills />
