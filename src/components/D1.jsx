@@ -182,20 +182,14 @@ const D1 = () => {
   return (
     <div
       ref={pageRef}
-      style={{
-        padding: "1.5rem",
-        paddingTop: "4rem",
-        height: "100vh",
-        width: "100%",
-        background:
-          "radial-gradient(circle at center, #2e2e2e, #000000, #000000)",
-      }}
+      className="p-6 pt-16 h-screen w-full bg-[radial-gradient(circle_at_center,_#d0d0d0,_#ffffff,_#ffffff)] dark:bg-[radial-gradient(circle_at_center,_#2e2e2e,_#000000,_#000000)]"
     >
       {/* Outer Box */}
       <div
         ref={boxRef}
-        className={`h-full w-full overflow-hidden border-black dark:border-neutral-400 border-4 sm:place-content-center
-          grid ${isLandscape ? "grid-cols-2" : "grid-cols-1"}`}
+        className={`h-full w-full overflow-hidden border-black dark:border-neutral-400 border-4 sm:place-content-center grid ${
+          isLandscape ? "grid-cols-2" : "grid-cols-1"
+        }`}
         style={{ borderRadius }}
       >
         {/* Headline */}
@@ -209,13 +203,11 @@ const D1 = () => {
         {/* Device Container */}
         <div
           ref={devRef}
-          className={`border-4 border-neutral-400 dark:border-neutral-500 bg-white dark:bg-black
-            ${
-              isLandscape
-                ? "grid grid-cols-2 grid-rows-1"
-                : "grid grid-cols-1 grid-rows-2"
-            }
-            place-self-center overflow-hidden`}
+          className={`border-4 border-neutral-400 dark:border-neutral-500 bg-white dark:bg-black ${
+            isLandscape
+              ? "grid grid-cols-2 grid-rows-1"
+              : "grid grid-cols-1 grid-rows-2"
+          } place-self-center overflow-hidden`}
           style={{
             borderRadius,
             width: `${deviceSize.width}px`,
