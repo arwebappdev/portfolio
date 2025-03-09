@@ -34,11 +34,11 @@ const getDeviceBrand = () => {
     return "Android";
   }
 
-  return "Unknown";
+  return "Windows";
 };
 
 const getScreenBorderRadius = () => {
-  if (typeof navigator === "undefined") return 25;
+  if (typeof navigator === "undefined") return 15;
   const userAgent = navigator.userAgent;
 
   // Apple devices
@@ -66,7 +66,7 @@ const getScreenBorderRadius = () => {
     return 25;
   }
 
-  return 25;
+  return 10;
 };
 
 const D1 = () => {
@@ -182,12 +182,19 @@ const D1 = () => {
   return (
     <div
       ref={pageRef}
-      className="p-6 pt-16 h-screen w-full bg-[radial-gradient(circle, #e0e0e0, #a0a0a0)] dark:bg-[radial-gradient(circle, #3d3d3d, #000000)]"
+      style={{
+        padding: "1.5rem",
+        paddingTop: "4rem",
+        height: "100vh",
+        width: "100%",
+        background:
+          "radial-gradient(circle at center, #2e2e2e, #000000, #000000)",
+      }}
     >
       {/* Outer Box */}
       <div
         ref={boxRef}
-        className={`h-full w-full overflow-hidden border-black dark:border-neutral-400 border-4 sm:place-content-center 
+        className={`h-full w-full overflow-hidden border-black dark:border-neutral-400 border-4 sm:place-content-center
           grid ${isLandscape ? "grid-cols-2" : "grid-cols-1"}`}
         style={{ borderRadius }}
       >
@@ -202,7 +209,7 @@ const D1 = () => {
         {/* Device Container */}
         <div
           ref={devRef}
-          className={`border-4 border-neutral-400 dark:border-neutral-500
+          className={`border-4 border-neutral-400 dark:border-neutral-500 bg-white dark:bg-black
             ${
               isLandscape
                 ? "grid grid-cols-2 grid-rows-1"
