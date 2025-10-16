@@ -1,6 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import DecryptedText from "../Textanimations/DecryptedText/DecryptedText";
 import TextPressure from "../Textanimations/TextPressure/TextPressure";
+import LightRays from "../Backgrounds/LightRays/LightRays";
+import me from "../assets/me.png";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 
@@ -48,7 +50,7 @@ const About = () => {
     <div
       id="About"
       ref={sectionRef}
-      className="h-fit bg-white dark:bg-black py-20"
+      className="h-full bg-white dark:bg-black py-20"
     >
       <div
         ref={aboutRef}
@@ -68,7 +70,7 @@ const About = () => {
         />
       </div>
 
-      <div className="relative left-0 top-0 mt-5 w-[70%] sm:w-1/2 h-fit text-center text-4xl sm:text-5xl font-mono p-5 text-black dark:text-white place-self-center">
+      <div className="relative left-0 top-0 mt-5 w-full h-fit p-5 text-4xl sm:text-5xl font-mono  text-black dark:text-white place-self-center grid lg:grid-cols-2">
         <DecryptedText
           text="Hi, I'm Abdul Rehman, a passionate Frontend Developer with a keen eye for design and a love for crafting interactive, visually stunning websites. I specialize in building creative UIs with smooth animations, ensuring an engaging user experience."
           animateOn="view"
@@ -78,6 +80,28 @@ const About = () => {
           className="revealed"
           encryptedClassName="encrypted"
         />
+        <div
+          style={{ width: "100%", height: "500px", position: "relative" }}
+          className="mt-5 z-[0] xl:-mt-4"
+        >
+          <LightRays
+            raysOrigin="right-center"
+            raysColor={isDarkMode ? "#ffffff" : "#404040"}
+            raysSpeed={1.5}
+            lightSpread={2.8}
+            rayLength={2.2}
+            followMouse={true}
+            mouseInfluence={0.1}
+            noiseAmount={0}
+            distortion={0.05}
+            className="custom-rays blur-md "
+          />
+          <img
+            src={me}
+            alt="It's me!"
+            className="absolute top-0 rounded-lg place-self-center xl:-mt-16"
+          />
+        </div>
       </div>
     </div>
   );

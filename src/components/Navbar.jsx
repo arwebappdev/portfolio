@@ -5,7 +5,7 @@ import ar2 from "../assets/ar2.jpg";
 import ShinyText from "../Textanimations/ShinyText/ShinyText";
 import BlurText from "../Textanimations/BlurText/BlurText";
 import PixelTransition from "../Animations/PixelTransition/PixelTransition";
-
+import Particles from "../Backgrounds/Particles/Particles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
@@ -230,16 +230,26 @@ const Navbar = () => {
     <div className="w-full h-screen overflow-hidden">
       <div
         ref={navRef}
-        className="flex z-[45] backdrop-blur-sm fixed top-0 h-16 w-full p-2 bg-gradient-to-b from-white from-20% via-white/65 via-70% to-white/40 dark:from-black dark:via-black/65 dark:to-black/40"
+        className="flex z-[45] fixed top-0 h-16 w-full p-2 overflow-visible bg-gradient-to-b from-white/80 from-20% via-white/40 via-60% to-white/0 dark:from-black/80 dark:from-20% dark:via-black/40 dark:via-60% dark:to-black/0"
         onMouseEnter={() => (isHovered.current = true)}
         onMouseLeave={() => (isHovered.current = false)}
       >
+        {/* 🔹 Blur gradient overlay (reversed: top → bottom) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 backdrop-blur-none [mask-image:linear-gradient(to_bottom,black,transparent_20%)]"></div>
+          <div className="absolute inset-0 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,black,transparent_40%)]"></div>
+          <div className="absolute inset-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black,transparent_60%)]"></div>
+          <div className="absolute inset-0 backdrop-blur-lg [mask-image:linear-gradient(to_bottom,black,transparent_80%)]"></div>
+        </div>
+
+        {/* 🔹 Logo */}
         <img
           ref={imgRef}
           src={arlogo || "/placeholder.svg"}
           className="absolute left-2 w-12 rounded-full ring-1 ring-neutral-400 dark:ring-neutral-600 invert-0 dark:invert-0"
-        ></img>
+        />
 
+        {/* 🔹 Name */}
         <div
           ref={nameRef}
           className="absolute left-16 text-2xl place-self-center"
@@ -254,80 +264,37 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/**Right menu */}
-        <div className=" hidden sm:flex place-self-center absolute right-5">
+        {/* 🔹 Right Menu */}
+        <div className="hidden sm:flex place-self-center absolute right-5">
           <ul className="flex gap-7 font-[roboto] font-light text-gray-600 dark:text-gray-400">
-            <a
-              href="#About"
-              className="h-fit w-fit"
-              onClick={(e) => handleScroll(e, "About")}
-            >
-              <li
-                onClick={() => setActiveSection("About")}
-                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "About"
-                    ? "text-black dark:text-white scale-105"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
+            {["About", "Skills", "Projects", "Contact"].map((section) => (
+              <a
+                key={section}
+                href={`#${section}`}
+                className="h-fit w-fit"
+                onClick={(e) => handleScroll(e, section)}
               >
-                About Me
-              </li>
-            </a>
-            <a
-              href="#Skills"
-              className="h-fit w-fit"
-              onClick={(e) => handleScroll(e, "Skills")}
-            >
-              <li
-                onClick={() => setActiveSection("Skills")}
-                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Skills"
-                    ? "text-black dark:text-white scale-105"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                Skills
-              </li>
-            </a>
-            <a
-              href="#Projects"
-              className="h-fit w-fit"
-              onClick={(e) => handleScroll(e, "Projects")}
-            >
-              <li
-                onClick={() => setActiveSection("Projects")}
-                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Projects"
-                    ? "text-black dark:text-white scale-105"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                Projects
-              </li>
-            </a>
-            <a
-              href="#Contact"
-              className="h-fit w-fit"
-              onClick={(e) => handleScroll(e, "Contact")}
-            >
-              <li
-                onClick={() => setActiveSection("Contact")}
-                className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
-                  activeSection === "Contact"
-                    ? "text-black dark:text-white scale-105"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                Contact
-              </li>
-            </a>
+                <li
+                  onClick={() => setActiveSection(section)}
+                  className={`hover:text-black dark:hover:text-white active:scale-95 duration-200 ${
+                    activeSection === section
+                      ? "text-black dark:text-white scale-105"
+                      : "text-gray-500 dark:text-gray-400"
+                  }`}
+                >
+                  {section === "About" ? "About Me" : section}
+                </li>
+              </a>
+            ))}
           </ul>
         </div>
+
+        {/* 🔹 Mobile Menu Icon */}
         <div
           onClick={() => setMenu(!menu)}
           onMouseEnter={() => setMenu(1)}
           onMouseLeave={() => setMenu(0)}
-          className={`sm:hidden place-self-center absolute right-5 duration-200 text-black dark:text-white `}
+          className="sm:hidden place-self-center absolute right-5 duration-200 text-black dark:text-white"
         >
           <FontAwesomeIcon
             icon={menu ? faEllipsisVertical : faBars}
@@ -335,6 +302,7 @@ const Navbar = () => {
           />
         </div>
       </div>
+
       {/**side menu */}
       <div
         onMouseEnter={() => setMenu(1)}
@@ -415,6 +383,21 @@ const Navbar = () => {
         id="Hero"
         className="relative z-0 bg-white dark:bg-black h-full w-full overflow-hidden"
       >
+        <div
+          style={{ width: "100%", height: "100%", position: "relative" }}
+          className="-z-30 ring-2 blur-[2px]"
+        >
+          <Particles
+            particleColors={["#ffffff", "#ffffff"]}
+            particleCount={300}
+            particleSpread={10}
+            speed={0.06}
+            particleBaseSize={200}
+            moveParticlesOnHover={true}
+            alphaParticles={true}
+            disableRotation={false}
+          />
+        </div>
         <div className="grid sm:grid-cols-2">
           <div
             ref={titleRef}
@@ -428,7 +411,7 @@ const Navbar = () => {
               className="text-[] font-[roboto] text-black dark:text-white"
             />
           </div>
-          <div className="hidden sm:flex absolute right-0 h-full w-[40%] place-content-start">
+          <div className="hidden sm:flex absolute top-0 right-0 h-full w-[40%] place-content-start">
             <PixelTransition
               firstContent={
                 <div
