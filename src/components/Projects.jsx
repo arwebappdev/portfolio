@@ -11,8 +11,17 @@ const projects = [
   {
     id: 1,
     title: "Layers-ANARC",
-    description: "Layers Re-designed website with awesome animations",
+    description: "Layers Re-designed website with awesome animations.",
     image: anarc,
+    url: "https://layers-ar.vercel.app",
+  },
+  {
+    id: 2,
+    title: "BMW M",
+    description: "A 3D website showcasing BMW M3 E30.",
+    image:
+      "https://www.bmw-m.com/content/dam/bmw/marketBMW_M/www_bmw-m_com/topics/magazine-article-pool/2018/bmw-m3-e30/bmw-m3-e30-article-image-02.jpg",
+    url: "https://r3f-car-showcase.vercel.app",
   },
 ];
 
@@ -131,7 +140,7 @@ const Projects = () => {
                     {project.description}
                   </p>
                   <a
-                    href="https://layers-ar.vercel.app"
+                    href={project.url}
                     target="_blank"
                     className="mt-4 flex w-[120px] items-center justify-center px-2 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
                   >
