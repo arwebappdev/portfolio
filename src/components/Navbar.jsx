@@ -309,7 +309,7 @@ const Navbar = () => {
         onMouseLeave={() => setMenu(0)}
         className={`fixed z-50 top-[30vh] h-fit w-fit bg-gradient-to-r from-white/40 from-[0%] via-white/60 via-[50%] to-white/90 to-[100%] dark:from-black/40 dark:via-black/60 dark:to-black/90 backdrop-blur-md ${
           menu ? "" : "translate-x-[150%]"
-        } right-0 rounded-l-[40px] p-5 -translate-y-1/2 duration-200`}
+        } right-0 rounded-l-[40px] border-black/30 dark:border-white/30 border-l-[1px] p-5 -translate-y-1/2 duration-200`}
       >
         <ul className="gap-7 font-[roboto] font-light text-gray-600 dark:text-gray-400 text-3xl text-center">
           <a
@@ -385,7 +385,7 @@ const Navbar = () => {
       >
         <div
           style={{ width: "100%", height: "100%", position: "relative" }}
-          className="-z-30 ring-2 blur-[2px]"
+          className="-z-30 blur-[2px]"
         >
           <Particles
             particleColors={["#ffffff", "#ffffff"]}
