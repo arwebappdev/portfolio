@@ -23,6 +23,57 @@ const projects = [
       "https://www.bmw-m.com/content/dam/bmw/marketBMW_M/www_bmw-m_com/topics/magazine-article-pool/2018/bmw-m3-e30/bmw-m3-e30-article-image-02.jpg",
     url: "https://r3f-car-showcase.vercel.app",
   },
+  {
+    id: 3,
+    title: "Glide",
+    description: "Video calling web app capable to work in low network areas.",
+    image:
+      "https://assets.sbs.com.au/dims4/default/f089bc0/2147483647/strip/true/crop/1600x900+0+0/resize/1280x720!/quality/90/?url=https%3A%2F%2Fsbs-au-brightspot.s3.ap-southeast-2.amazonaws.com%2Fdrupal%2Fyourlanguage%2Fpublic%2Fwhatsapp_1.jpeg",
+    url: "https://glide-ar.vercel.app",
+  },
+  {
+    id: 4,
+    title: "Sync Audio",
+    description:
+      "Broadcast audio to multiple devices in sync with more features.",
+    image:
+      "https://img.magnific.com/free-photo/techno-party-lifestyle_52683-122049.jpg",
+    url: "https://sync-audio-ar.vercel.app",
+  },
+  {
+    id: 5,
+    title: "Clinic SaaS",
+    description:
+      "A multi-tenant SaaS platform for clinics to manage appointments, patients, and consultations.",
+    image: "https://www.xform.in/images/clinic11.jpg",
+    url: "https://deardoc.in",
+  },
+  {
+    id: 6,
+    title: "PPT Controller",
+    description:
+      "A web app to control PowerPoint presentations remotely using a mobile device.",
+    image: "https://pptcontrol.app/assets/images/home/hero_en.png",
+    url: "https://ppt-controller.vercel.app",
+  },
+  {
+    id: 7,
+    title: "Sheet Rectifier",
+    description:
+      "A multi-tenant SaaS platform for rectifying sheets for Centralized Placement Cell, DAVV University, Indore.",
+    image:
+      "https://gdm-catalog-fmapi-prod.imgix.net/ProductScreenshot/b3ead185-730a-4bb1-b9eb-28733352d142.png",
+    url: "https://sheet-rectifier.vercel.app",
+  },
+  {
+    id: 7,
+    title: "Habit Tracker",
+    description:
+      "Cross Platform application to track your habits and improve your lifestyle.",
+    image:
+      "https://prettyprogress.app/cdn-images/22e9f626-6586-4192-94e7-f617a8e8f203/b38a4027-7a60-4baf-909b-c5957b4eaca8/habit-tracker-app-reviews-habit-app.jpg?width=1200&v=2",
+    url: "https://expo.dev/accounts/arwebappdev/projects/HabitTracker/builds/152d887d-7eb6-4095-8f96-2e3f0ae6ee58",
+  },
 ];
 
 const Projects = () => {
@@ -31,7 +82,7 @@ const Projects = () => {
   const cardsRef = useRef([]);
 
   const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
 
   useEffect(() => {
@@ -99,19 +150,25 @@ const Projects = () => {
       <div className="container mx-auto px-4">
         <div
           ref={projectRef}
-          className="relative z-30 mb-10 text-black dark:text-white place-self-center text-5xl border-t-2 border-gray-300 bg-gradient-to-b from-gray-200 dark:from-gray-600 via-white dark:via-black to-white dark:to-black opacity-0"
+          className="relative w-auto z-30 mb-10 text-black dark:text-white place-self-center text-5xl border-t-2 border-gray-300 bg-gradient-to-b from-gray-200 dark:from-gray-600 via-white dark:via-black to-white dark:to-black opacity-0"
         >
           <TextPressure
-            text="projects"
-            flex={true}
+            text="Projects"
+            flex
             alpha={false}
             stroke={false}
-            width={true}
-            weight={true}
-            italic={true}
-            textColor="currentColor"
-            strokeColor="#ff0000"
-            minFontSize={150}
+            width
+            weight
+            italic
+            radius={0.5}
+            smoothing={0.5}
+            idle="wave"
+            idleSpeed={1}
+            clickRipple
+            strokeColor="#ff5a1f"
+            strokeWidth={3}
+            minFontSize={100}
+            scale={false}
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

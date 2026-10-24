@@ -17,7 +17,7 @@ const Skills = () => {
   const pageRef = useRef();
   const blurRef = useRef();
   const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
 
   useEffect(() => {
@@ -88,19 +88,25 @@ const Skills = () => {
       ></div>
       <div
         ref={skillRef}
-        className="relative z-30 text-black dark:text-white place-self-center text-5xl border-t-2 border-gray-300 bg-gradient-to-b from-gray-200 dark:from-gray-600 from-1% via-white dark:via-black via-20% to-white dark:to-black opacity-0"
+        className="relative w-auto z-30 text-black dark:text-white place-self-center text-5xl border-t-2 border-gray-300 bg-gradient-to-b from-gray-200 dark:from-gray-600 from-1% via-white dark:via-black via-20% to-white dark:to-black opacity-0"
       >
         <TextPressure
-          text="skills"
-          flex={true}
+          text="Skills"
+          flex
           alpha={false}
           stroke={false}
-          width={true}
-          weight={true}
-          italic={true}
-          textColor="currentColor"
-          strokeColor="#ff0000"
-          minFontSize={150}
+          width
+          weight
+          italic
+          radius={0.5}
+          smoothing={0.5}
+          idle="wave"
+          idleSpeed={1}
+          clickRipple
+          strokeColor="#ff5a1f"
+          strokeWidth={3}
+          minFontSize={100}
+          scale={false}
         />
       </div>
 
